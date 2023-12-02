@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,6 +48,15 @@ namespace P04WeatherForecastAPI.Client.Services.BookServices
 
         public async Task<ServiceResponse<List<Book>>> ReadBooksAsync()
         {
+            var response = await _httpClient.GetAsync(_appSettings.BaseBookEndpoint.GetBooksAsync);
+            var json = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<ServiceResponse<List<Book>>>(json);
+            return result;
+        }
+
+        public async Task<ServiceResponse<List<Book>>> ReadBooksAsync(string token)
+        {
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.Replace("\"", ""));
             var response = await _httpClient.GetAsync(_appSettings.BaseBookEndpoint.GetBooksAsync);
             var json = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<ServiceResponse<List<Book>>>(json);

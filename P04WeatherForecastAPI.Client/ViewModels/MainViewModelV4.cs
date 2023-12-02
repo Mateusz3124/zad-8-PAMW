@@ -97,5 +97,13 @@ namespace P04WeatherForecastAPI.Client.ViewModels
             shopProductsView.Show();
             productsViewModel.GetProducts();
         }
+        [RelayCommand]
+        public void OpenLoginWindow()
+        {
+            LoginView loginView = _serviceProvider.GetService<LoginView>();
+
+            loginView.Show();
+
+        }
     }
 }

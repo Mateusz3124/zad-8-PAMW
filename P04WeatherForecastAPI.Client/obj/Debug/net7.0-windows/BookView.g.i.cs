@@ -61,7 +61,7 @@ namespace P04WeatherForecastAPI.Client {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/P04WeatherForecastAPI.Client;V1.0.0.0;component/bookview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/P04WeatherForecastAPI.Client;component/bookview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\BookView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

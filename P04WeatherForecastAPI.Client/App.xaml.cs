@@ -16,6 +16,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Extensions.Options;
+using P06Shop.Shared.Services.AuthService;
 
 namespace P04WeatherForecastAPI.Client
 {
@@ -78,6 +79,7 @@ namespace P04WeatherForecastAPI.Client
             services.AddSingleton<MainViewModelV4>();
             services.AddSingleton<BookViewModel>();
             services.AddSingleton<ProductsViewModel>();
+            services.AddSingleton<LoginViewModel>();
         }
 
         private void ConfigureViews(IServiceCollection services)
@@ -87,6 +89,7 @@ namespace P04WeatherForecastAPI.Client
             services.AddTransient<MainWindow>();
             services.AddTransient<BookView>();
             services.AddTransient<ShopProductsView>();
+            services.AddTransient<LoginView>();
         }
 
         private void ConfigureHttpClients(IServiceCollection services, AppSettings appSettingsSection)
@@ -103,6 +106,11 @@ namespace P04WeatherForecastAPI.Client
                 Path = appSettingsSection.BaseBookEndpoint.Base_url,
             };
             services.AddHttpClient<IBookService, BookService>(client => client.BaseAddress = uriBuilder2.Uri);
+            var uriBuilder3 = new UriBuilder(appSettingsSection.BaseAPIUrl)
+            {
+                //Path = appSettingsSection.BaseBookEndpoint.Base_url,
+            };
+            services.AddHttpClient<IAuthService, AuthService>(client => client.BaseAddress = uriBuilder3.Uri);
         }
 
         private void OnStartup(object sender, StartupEventArgs e)

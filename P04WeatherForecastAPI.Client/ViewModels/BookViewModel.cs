@@ -55,7 +55,9 @@ namespace P04WeatherForecastAPI.Client.ViewModels
             page = 0;
             ShownPage = "0";
             current = 0;
-            var BookResult = await _bookService.ReadBooksAsync();
+            LoginViewModel loginViewModel = _serviceProvider.GetService<LoginViewModel>();
+            string token = loginViewModel.Token;
+            var BookResult = await _bookService.ReadBooksAsync(token);
             int count = 0;
             books.Add(new List<Book>());
             if (BookResult.Success)
