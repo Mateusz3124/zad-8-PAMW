@@ -1,0 +1,26 @@
+﻿<Window x:Class="P04WeatherForecastAPI.Client.BookView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:P04WeatherForecastAPI.Client"
+        mc:Ignorable="d"
+        Title="BookView" Height="450" Width="800">
+    <Grid>
+        <ListView ItemsSource="{Binding visibleBooks}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Label Content="{Binding Id}" />
+                        <Label Content="{Binding Title}" />
+                        <Label Content="{Binding Author}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Content=">>" Command="{Binding reloadRightCommand}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,53,25" />
+        <Label x:Name="lblpage" Content="{Binding ShownPage}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,25"/>
+        <Button Content="Edit" Command="{Binding LoaderOfDetailsCommand}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,3" />
+        <Button Content="&lt;&lt;" Command="{Binding reloadLeftCommand}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="53,0,0,25" />
+    </Grid>
+</Window>

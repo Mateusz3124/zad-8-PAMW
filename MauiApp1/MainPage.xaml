@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="P12MAUI.Client.MainPage"
+             xmlns:viewmodel="clr-namespace:P04WeatherForecastAPI.Client.ViewModels"
+            BackgroundColor="Black" >
+     
+
+
+
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="25"
+            Padding="30,0"
+            VerticalOptions="Center">
+
+            <Button   
+        Command="{Binding NewCommand}" 
+          Text="New Book" >
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="DarkGray" />
+                
+                   
+                        <Setter Property="Padding" Value="10,5" />
+                        <Setter Property="FontSize" Value="14" />
+                        
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <CollectionView  ItemsSource="{Binding Products}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="DarkGray" Padding="10" Margin="5">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BookViewModel}}, Path=ShowDetailsCommand }"
+                                CommandParameter="{Binding .}" ></TapGestureRecognizer>
+                            </Frame.GestureRecognizers>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <!--Pierwszy wiersz-->
+                                <HorizontalStackLayout Grid.Row="0" >
+                                    <Label Text="{Binding Id}"  Margin="0,0,10,0"></Label>
+                                    <Label Text="{Binding Title}" FontSize="16"></Label>
+                                </HorizontalStackLayout>
+                                <!--Drugi wiersz-->
+                                <Label Grid.Row="1" Text="{Binding Author}"></Label>
+                            </Grid>
+                        </Frame>
+                           
+                        
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

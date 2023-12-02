@@ -1,0 +1,31 @@
+﻿@page "/products/createbook"
+
+@inject IBookService ProductService
+@inject NavigationManager NavigationManager
+
+<h3>Create Product</h3>
+
+@if (message != null)
+{
+    <p><em>@message</em></p>
+}
+else
+{
+    <BookForm book="book" OnValidSubmit="HandleValidSubmit"></BookForm>
+}
+
+@code {
+    private Book book = new Book();
+    private string? message = null;
+
+    async Task HandleValidSubmit()
+    {
+        var response = await ProductService.CreateBookAsync(book);
+        if (response.Success)
+            NavigationManager.NavigateTo("/products/bookList");
+        else
+            message = response.Message;
+    }
+
+
+}

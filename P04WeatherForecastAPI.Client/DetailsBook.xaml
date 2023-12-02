@@ -1,0 +1,22 @@
+﻿<Window x:Class="P04WeatherForecastAPI.Client.DetailsBook"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:P04WeatherForecastAPI.Client"
+        mc:Ignorable="d"
+        Title="DetailsBook" Height="300" Width="300">
+    <Grid>
+        <StackPanel Margin="0,0,0,-25">
+            <Label  Content="Id:" Height="30" VerticalAlignment="Top" />
+            <TextBox  x:Name="Id" Height="28" Width="105" Text="{Binding Id}"/>
+            <Label  Content="Title:" Height="30" VerticalAlignment="Top"/>
+            <TextBox  x:Name="Title" Height="28" Width="105" Text="{Binding Title}"/>
+            <Label  Content="Author:" Height="30" VerticalAlignment="Top"/>
+            <TextBox  x:Name="Author" Height="28" Width="102" Text="{Binding Author}"/>
+            <Button Content="Add" Command="{Binding createCommand}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,5,0,0" />
+            <Button Content="Remove" Command="{Binding removeCommand}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,5,0,0" />
+            <Button Content="Update" Command="{Binding updateCommand}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,5,0,0" />
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,117 @@
+﻿@page "/products/bookList"
+@using Blazored.LocalStorage;
+@inject IBookService ProductService
+@inject NavigationManager NavigationManager
+@inject ILocalStorageService LocalStorageService
+
+<h3>Full list of products</h3>
+
+
+<p>
+    <a href="products/createbook">Create new book</a>
+</p>
+
+@if (books == null)
+{
+    <p><em>@message</em></p>
+}
+
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Author</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in books)
+            {
+                <tr>
+                    <td>@product.Id</td>
+                    <td>@product.Title</td>
+                    <td>@product.Author</td>
+                    <td>
+                        <button class="btn btn-primary" @onclick="()=> GoToEdit(product.Id)">Edit</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <button class="btn btn-primary" disabled="@(currentPage==1)" @onclick="PreviousPage">Previous</button>
+    <span>@currentPage</span>
+    <button class="btn btn-primary" @onclick="NextPage">Next</button>
+}
+
+
+
+@code {
+    private List<Book> books;
+    private string message = "Loading products...";
+
+    private int currentPage = 1;
+    private const int pageSize = 10;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        books = new List<Book>();
+        await  LoadProducts();
+    }
+
+    private async Task LoadProducts()
+    {
+        string authToken = await LocalStorageService.GetItemAsStringAsync("authToken");
+        var response = await ProductService.ReadBooksAsync(authToken);
+        if (response.Success)
+        {
+            if (!(response.Data.Count - (currentPage - 1) * pageSize <= 0))
+            {
+                books.Clear();
+                int max = currentPage * pageSize;
+                if(response.Data.Count < max)
+                {
+                    max = response.Data.Count;
+                }
+                for (int i = (currentPage - 1) * pageSize; i < max; i++)
+                {
+                    if(response.Data[i] != null)
+                    {
+                        books.Add(response.Data[i]);
+                    }
+                }
+            }
+            else
+            {
+                currentPage--;
+            }
+        }
+        else
+        {
+            message = response.Message;
+        }
+    }
+
+
+    void GoToEdit(int id)
+    {
+        NavigationManager.NavigateTo($"/products/editbook/{id}");
+    }
+
+    private async Task PreviousPage()
+    {
+        if (currentPage > 1)
+        {
+            currentPage--;
+            await LoadProducts();
+        }
+    }
+    private async Task NextPage()
+    {
+        currentPage++;
+        await LoadProducts();
+    }
+}

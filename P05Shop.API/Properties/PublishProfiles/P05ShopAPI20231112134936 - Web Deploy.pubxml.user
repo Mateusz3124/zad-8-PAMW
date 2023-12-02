@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAzCreOLU/0UKrOI60Z94KgwAAAAACAAAAAAAQZgAAAAEAACAAAADNYkSv0OUpuHjg8IJsuDs4HYjat5zhuBl8AEPtNoI1zwAAAAAOgAAAAAIAACAAAADTdvYpxxH85viZypBD9EajfY68fsSjNOjFrruDn9R3b4AAAADynQSKt1+hv8cADgcS1rbrpy4DMjrFlXafYydcBmQY0Lkehr4SQoHNgI7lBB5gyzygK81lQX/Lr2Y4XlnwEVYBF/xqvbNOhLrG0btoD7RqetRdbJRVWtlYswE5m3lQVhrWOtvpR8d6AmN8iOfbA1qR4FiDq+YIWV6EpQ2rAO15lUAAAACj/ndy3o3bETjC92Oo1xpbINSHtPeNUD2hLpTjii2+OuiQu30Sq/DVIjiYUGp6uO1DkBmFLYVe5WmiBCDqLeh7</EncryptedPassword>
+    <IsBasicAuthAllowed>True</IsBasicAuthAllowed>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Data Source=%28localdb%29\mssqllocaldb%3bInitial Catalog=shop%3bUser id=root%3bPassword=K2I82002%40MW%3b</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="P05Shop.API.Models.DataContext">
+      <Value>Data Source=%28localdb%29\mssqllocaldb%3bInitial Catalog=shop%3bUser id=root%3bPassword=K2I82002%40MW%3b</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>
