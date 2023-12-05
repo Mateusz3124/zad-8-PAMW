@@ -19,7 +19,7 @@ namespace P05Shop.API.Controllers
             this._authService = authService;
         }
 
-        [HttpGet("Secret"), Authorize]
+        [HttpGet("Secret"), Authorize(Roles = "Admin")]
         public string SecretText()
         {
             return "secret";

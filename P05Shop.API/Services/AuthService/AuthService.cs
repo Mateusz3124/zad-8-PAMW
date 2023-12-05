@@ -107,6 +107,7 @@ namespace P05Shop.API.Services.AuthService
 
         public async Task<ServiceResponse<int>> Register(User user, string password)
         {
+            user.Role = "Customer";
             if (await UserExists(user.Email))
             {
                 return new ServiceResponse<int>
@@ -114,6 +115,11 @@ namespace P05Shop.API.Services.AuthService
                     Success = false,
                     Message = "User already exists."
                 };
+            }
+
+            if (user.Email.Equals("adminemail@gmail.com"))
+            {
+                user.Role = "Admin";
             }
 
             // create password hash and salt
